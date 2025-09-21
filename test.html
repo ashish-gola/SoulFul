@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduled Notification</title>
+</head>
+<body>
+
+<script>
+  function scheduleNotification() {
+    // const targetTime = new Date('2024-02-02T12:00:00').getTime();
+    const targetTime = new Date()
+    const delay = targetTime - new Date().getTime();
+
+    if (delay > 0) {
+      setTimeout(() => {
+        if ('Notification' in window) {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              const notification = new Notification('Scheduled Notification', {
+                body: 'It\'s time for your notification!'
+              });
+            }
+          });
+        }
+      }, delay);
+    }
+  }
+
+  // Call the function to schedule the notification
+  scheduleNotification();
+</script>
+
+</body>
+</html>
